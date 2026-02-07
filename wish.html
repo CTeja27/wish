@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Jass 🎂</title>
+
+  <!-- Kawaii / cartoon fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink1:#ffd6e8;
+      --pink2:#ffb6d9;
+      --pink3:#ff7fbe;
+      --cream:#fff7fb;
+      --ink:#2a1430;
+      --shadow: 0 26px 80px rgba(33, 10, 30, .25);
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow:hidden;
+      font-family:"Baloo 2", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--ink);
+
+      /* Baby pink dreamy background */
+      background:
+        radial-gradient(900px 520px at 20% 10%, rgba(255,182,217,.85) 0%, transparent 60%),
+        radial-gradient(900px 520px at 80% 25%, rgba(255,214,232,.9) 0%, transparent 60%),
+        radial-gradient(900px 520px at 50% 110%, rgba(255,127,190,.45) 0%, transparent 60%),
+        linear-gradient(180deg, #fff3f9, #ffe1ef);
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 22px;
+    }
+
+    /* Soft sparkles */
+    .sparkle{
+      position:fixed;
+      inset:-20%;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255,255,255,.65) 0 2px, transparent 3px),
+        radial-gradient(circle at 55% 15%, rgba(255,255,255,.45) 0 2px, transparent 3px),
+        radial-gradient(circle at 75% 35%, rgba(255,255,255,.55) 0 2px, transparent 3px),
+        radial-gradient(circle at 30% 75%, rgba(255,255,255,.40) 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,.35) 0 2px, transparent 3px);
+      filter: blur(.2px);
+      animation: drift 18s linear infinite;
+    }
+    @keyframes drift{
+      0%{ transform: translateY(0px) rotate(0deg); }
+      100%{ transform: translateY(55px) rotate(6deg); }
+    }
+
+    /* Centered popup */
+    .popup{
+      width: min(760px, 96vw);
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,240,247,.94), rgba(255,247,251,.92));
+      border: 2px solid rgba(255,127,190,.35);
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+      text-align:center;
+
+      transform: translateY(14px) scale(.985);
+      opacity: 0;
+      animation: popIn .5s cubic-bezier(.2,.9,.2,1) forwards;
+    }
+    @keyframes popIn{
+      to{ transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* Soft blobs behind content */
+    .blob{
+      position:absolute;
+      inset:-30%;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,79,169,.16) 0 130px, transparent 131px),
+        radial-gradient(circle at 70% 20%, rgba(255,182,217,.22) 0 170px, transparent 171px),
+        radial-gradient(circle at 80% 80%, rgba(255,127,190,.14) 0 190px, transparent 191px);
+      filter: blur(12px);
+    }
+
+    .inner{
+      position:relative;
+      padding: 28px 18px 22px;
+    }
+
+    .title{
+      margin: 6px 0 14px;
+      font-family:"Fredoka", system-ui;
+      font-weight: 800;
+      font-size: clamp(52px, 7vw, 90px);
+      line-height: 1.0;
+      letter-spacing: .3px;
+      text-shadow: 0 7px 0 rgba(255,127,190,.22);
+    }
+    .name{
+      background: linear-gradient(90deg, #ff4fa9, #ff8fcb, #ff4fa9);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color: transparent;
+      filter: drop-shadow(0 6px 0 rgba(255,255,255,.22));
+    }
+
+    .pooh{
+      width: min(460px, 92vw);
+      border-radius: 26px;
+      border: 2px solid rgba(255,127,190,.26);
+      background: rgba(255,255,255,.6);
+      box-shadow: 0 20px 48px rgba(33,10,30,.16);
+      display:block;
+      margin: 0 auto;
+    }
+
+    /* Falling flowers */
+    .petal{
+      position: fixed;
+      top: -40px;
+      left: 0px;
+      font-size: 30px;
+      will-change: transform;
+      pointer-events:none;
+      filter: drop-shadow(0 7px 8px rgba(33,10,30,.18));
+      animation: fall linear forwards;
+      opacity: .98;
+      z-index: 50;
+    }
+    @keyframes fall{
+      to{
+        transform: translate(var(--dx), 110vh) rotate(var(--rot));
+        opacity: .98;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sparkle"></div>
+
+  <div class="popup">
+    <div class="blob"></div>
+    <div class="inner">
+      <div class="title">Happy Birthday, <span class="name">Jass</span>! 🎂</div>
+
+      <img
+        class="pooh"
+        src="https://raw.githubusercontent.com/CTeja27/cteja27.github.io/874558d0d94b8c5ed713c30119adc07284b5f6d5/IMG_0708.gif"
+        alt="Pooh GIF"
+      />
+    </div>
+  </div>
+
+  <script>
+    // Only flowers (roses + lilies vibes)
+    const FLOWERS = ["🌹","🌹","🌹","🤍","🤍","🌸","🌷","💮"];
+
+    function spawnFlower() {
+      const el = document.createElement("div");
+      el.className = "petal";
+      el.textContent = FLOWERS[Math.floor(Math.random() * FLOWERS.length)];
+
+      const startX = Math.random() * window.innerWidth;
+      const drift = (Math.random() * 260 - 130) + "px";
+      const rot = (Math.random() * 720 - 360) + "deg";
+      const dur = (Math.random() * 3.0 + 3.2); // 3.2–6.2s
+      const size = Math.random() * 16 + 22;     // 22–38px
+
+      el.style.left = startX + "px";
+      el.style.setProperty("--dx", drift);
+      el.style.setProperty("--rot", rot);
+      el.style.animationDuration = dur + "s";
+      el.style.fontSize = size + "px";
+
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), (dur * 1000) + 300);
+    }
+
+    function startFlowerFall(){
+      // nice opening burst
+      for (let i = 0; i < 45; i++) setTimeout(spawnFlower, i * 55);
+
+      // steady fall forever
+      setInterval(() => {
+        const count = Math.random() < 0.75 ? 1 : 2;
+        for (let i = 0; i < count; i++) spawnFlower();
+      }, 420);
+    }
+
+    startFlowerFall();
+  </script>
+</body>
+</html>
